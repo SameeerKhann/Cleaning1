@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<footer style="max-width:1220px;margin:56px auto 0;padding:40px clamp(16px,4vw,40px) 48px;border-top:1px solid rgba(16,42,76,0.08);font-family:Manrope,system-ui,sans-serif;">
+  <div style="display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start;">
+    <div style="max-width:320px;">
+      <div style="display:flex;align-items:center;margin-bottom:14px;">
+        <img src="assets/kidus-logo-v2.png" alt="Kidus Clean" style="height:38px;width:auto;display:block;"/>
+      </div>
+      <p style="font-size:13.5px;line-height:1.6;color:rgba(16,42,76,0.5);margin:0 0 16px;">Eco-friendly residential &amp; commercial cleaning across Edmonton, AB. Immaculate spaces, healthier environments — guaranteed.</p>
+      <div style="display:flex;gap:10px;">
+        <sc-for list="{{ socials }}" as="so" hint-placeholder-count="4">
+          <a href="{{ so.url }}" target="_blank" aria-label="{{ so.label }}" style="width:38px;height:38px;border-radius:11px;background:rgba(16,42,76,0.06);border:1px solid rgba(16,42,76,0.12);display:inline-flex;align-items:center;justify-content:center;font-size:15px;text-decoration:none;color:#102A4C;transition:background .2s ease,border-color .2s ease;" style-hover="background:rgba(37,99,235,0.16);border-color:rgba(37,99,235,0.4);">{{ so.icon }}</a>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;gap:clamp(28px,6vw,64px);flex-wrap:wrap;">
+      <sc-for list="{{ footerCols }}" as="col" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <span style="font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.4px;color:#102A4C;margin-bottom:3px;">{{ col.title }}</span>
+          <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="3">
+            <a href="{{ l.href }}" style="font-size:13.5px;color:rgba(16,42,76,0.55);text-decoration:none;transition:color .2s ease;" style-hover="color:#2563EB;">{{ l.label }}</a>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="margin-top:34px;padding-top:20px;border-top:1px solid rgba(16,42,76,0.06);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <span style="font-size:12.5px;color:rgba(16,42,76,0.4);">© 2025 Kidus General Facility Cleaning. All rights reserved.</span>
+    <span style="font-size:12.5px;color:rgba(16,42,76,0.4);">info@kidusclean.com · 587-713-0909</span>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1220,&quot;height&quot;:360}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      socials: [
+        { label: 'Facebook', icon: 'f', url: 'https://www.facebook.com/kidus.yohannes.246922/' },
+        { label: 'Instagram', icon: '◎', url: 'https://www.instagram.com/kidusclean' },
+        { label: 'LinkedIn', icon: 'in', url: 'https://www.linkedin.com/kidusclean' },
+        { label: 'TikTok', icon: '♪', url: 'https://www.tiktok.com/@kidusfaciltycleaning' },
+      ],
+      footerCols: [
+        { title: 'Services', links: [ { label: 'Residential', href: 'Services.dc.html' }, { label: 'Deep Clean', href: 'Services.dc.html' }, { label: 'Move-In / Out', href: 'Services.dc.html' }, { label: 'Commercial', href: 'Services.dc.html' } ] },
+        { title: 'Company', links: [ { label: "What's Included", href: 'Checklist.dc.html' }, { label: 'About Kidus', href: 'Kidus%20Cleaning.dc.html#about' }, { label: 'Gallery', href: 'Kidus%20Cleaning.dc.html#gallery' }, { label: 'Service Areas', href: 'Kidus%20Cleaning.dc.html#areas' } ] },
+        { title: 'Get in touch', links: [ { label: 'Instant Quote', href: 'https://kidusclean.com/quoteonline.php' }, { label: 'Call 587-713-0909', href: 'tel:5877130909' }, { label: 'info@kidusclean.com', href: 'mailto:info@kidusclean.com' }, { label: 'Contact Us', href: 'Contact.dc.html' } ] },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

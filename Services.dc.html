@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&display=block" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{margin:0;background:#FFFFFF;}
+    ::selection{background:#2563EB;color:#FFFFFF;}
+    @keyframes kcGlow{0%,100%{box-shadow:0 0 22px rgba(37,99,235,0.4);}50%{box-shadow:0 0 36px rgba(37,99,235,0.8);}}
+    @keyframes kcReveal{from{opacity:0;transform:translateY(42px) scale(.985);}to{opacity:1;transform:none;}}
+    [data-reveal],[data-reveal-stagger]{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+    @media (max-width:1024px){.kc-desktop-nav{display:none !important;}.kc-hamburger{display:flex !important;}}
+    @media (min-width:1025px){.kc-hamburger{display:none !important;}.kc-mpanel{transform:translateX(110%) !important;}.kc-moverlay{opacity:0 !important;pointer-events:none !important;}}
+    @media (max-width:760px){.kc-type{grid-template-columns:1fr !important;}}
+  </style>
+  <script src="kc-reveal.js"></script>
+</helmet>
+
+<div ref="{{ rootRef }}" data-screen-label="Services" style="position:relative;min-height:100vh;background:#FFFFFF;color:#102A4C;font-family:Manrope,system-ui,sans-serif;overflow-x:hidden;">
+  <div style="position:absolute;top:-160px;right:-160px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.12),transparent 65%);filter:blur(20px);pointer-events:none;"></div>
+
+  <dc-import name="KidusNav" active="services" hint-size="100%,76px" style="position:fixed;top:0;left:0;right:0;z-index:60;"></dc-import>
+
+  <!-- PAGE HEADER -->
+  <section style="max-width:1220px;margin:0 auto;padding:140px clamp(16px,4vw,40px) 20px;">
+    <div data-reveal="1" style="max-width:720px;">
+      <a href="Kidus%20Cleaning.dc.html" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:rgba(16,42,76,0.55);text-decoration:none;margin-bottom:16px;"><span style="font-family:'Material Symbols Outlined';font-size:16px;">arrow_back</span> Home</a>
+      <span style="display:block;font-size:12.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2563EB;">Our services</span>
+      <h1 style="font-family:Sora,sans-serif;font-weight:800;font-size:clamp(34px,5.4vw,60px);letter-spacing:-1.6px;line-height:1.04;margin:12px 0 16px;color:#102A4C;">Cleaning that goes<br>beyond the basics.</h1>
+      <p style="font-size:clamp(15px,1.9vw,18px);line-height:1.65;color:rgba(16,42,76,0.7);margin:0;max-width:560px;">From a one-time deep reset to recurring upkeep and move-day rescues — every Kidus clean is detailed, eco-friendly and backed by our 100% satisfaction guarantee.</p>
+    </div>
+  </section>
+
+  <!-- SERVICE TYPES -->
+  <section style="max-width:1220px;margin:0 auto;padding:20px clamp(16px,4vw,40px) 24px;">
+    <div class="kc-type" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+      <sc-for list="{{ types }}" as="t" hint-placeholder-count="6">
+        <div data-reveal="1" style="{{ t.cardStyle }}" style-hover="border-color:rgba(37,99,235,0.4);transform:translateY(-5px);">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:14px;background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.28);font-family:'Material Symbols Outlined';font-size:27px;color:#2563EB;">{{ t.icon }}</span>
+            <span style="padding:5px 12px;border-radius:999px;background:rgba(16,42,76,0.06);border:1px solid rgba(16,42,76,0.12);font-size:11.5px;font-weight:600;color:rgba(16,42,76,0.75);">{{ t.tag }}</span>
+          </div>
+          <h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.4px;margin:0 0 7px;color:#102A4C;">{{ t.title }}</h3>
+          <p style="font-size:14px;line-height:1.6;color:rgba(16,42,76,0.62);margin:0 0 16px;">{{ t.desc }}</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <sc-for list="{{ t.includes }}" as="inc" hint-placeholder-count="4">
+              <span style="display:flex;align-items:flex-start;gap:9px;font-size:13px;color:rgba(16,42,76,0.8);"><span style="font-family:'Material Symbols Outlined';font-size:16px;color:#2563EB;flex-shrink:0;">check_circle</span>{{ inc }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- SPACES WE CLEAN -->
+  <section style="max-width:1220px;margin:0 auto;padding:48px clamp(16px,4vw,40px) 24px;">
+    <div data-reveal="1" style="margin-bottom:30px;">
+      <span style="font-size:12.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2563EB;">Every kind of space</span>
+      <h2 style="font-family:Sora,sans-serif;font-weight:800;font-size:clamp(26px,4vw,40px);letter-spacing:-1px;line-height:1.1;margin:12px 0 0;color:#102A4C;">Homes, offices &amp; specialty properties.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;">
+      <sc-for list="{{ spaces }}" as="sv" hint-placeholder-count="8">
+        <div data-reveal="1" style="display:flex;gap:14px;align-items:flex-start;padding:20px;border-radius:16px;background:#EFF4FB;border:1px solid rgba(16,42,76,0.07);transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-5px);border-color:rgba(37,99,235,0.4);">
+          <span style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.28);font-family:'Material Symbols Outlined';font-size:23px;color:#2563EB;flex-shrink:0;">{{ sv.icon }}</span>
+          <div><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:16px;margin:0 0 4px;color:#102A4C;">{{ sv.title }}</h3><p style="font-size:12.5px;line-height:1.5;color:rgba(16,42,76,0.6);margin:0;">{{ sv.desc }}</p></div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ADD-ONS -->
+  <section style="max-width:1220px;margin:0 auto;padding:36px clamp(16px,4vw,40px);">
+    <div data-reveal="1" style="padding:clamp(28px,4vw,44px);border-radius:24px;background:linear-gradient(135deg,#DCE8F8,#EFF4FB);border:1px solid rgba(16,42,76,0.08);">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;">
+        <div><span style="font-size:12.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2563EB;">Make it yours</span><h2 style="font-family:Sora,sans-serif;font-weight:800;font-size:clamp(22px,3.2vw,32px);letter-spacing:-0.8px;margin:10px 0 0;color:#102A4C;">Popular add-ons</h2></div>
+        <a href="https://kidusclean.com/quoteonline.php" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;background:#2563EB;color:#FFFFFF;font-family:Sora,sans-serif;font-weight:700;font-size:14px;text-decoration:none;animation:kcGlow 2.6s ease-in-out infinite;">Add to my quote →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">
+        <sc-for list="{{ addons }}" as="a" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:11px;padding:14px 16px;border-radius:13px;background:rgba(255,255,255,0.5);border:1px solid rgba(16,42,76,0.08);"><span style="font-family:'Material Symbols Outlined';font-size:21px;color:#2563EB;">{{ a.icon }}</span><span style="font-size:13.5px;font-weight:600;color:#102A4C;">{{ a.label }}</span></div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="max-width:1220px;margin:24px auto 0;padding:0 clamp(16px,4vw,40px);">
+    <div data-reveal="1" style="position:relative;overflow:hidden;border-radius:28px;padding:clamp(40px,6vw,64px);text-align:center;background:linear-gradient(135deg,#DCE8F8,#EFF4FB);border:1px solid rgba(37,99,235,0.25);">
+      <div style="position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.22),transparent 65%);filter:blur(10px);pointer-events:none;"></div>
+      <div style="position:relative;z-index:2;">
+        <h2 style="font-family:Sora,sans-serif;font-weight:800;font-size:clamp(28px,4.6vw,46px);letter-spacing:-1.2px;line-height:1.08;margin:0 0 14px;color:#102A4C;">Not sure which clean you need?</h2>
+        <p style="font-size:clamp(15px,2vw,17px);color:rgba(16,42,76,0.72);margin:0 auto 28px;max-width:480px;line-height:1.6;">Tell us about your space and we'll recommend the right service — with instant, transparent pricing.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+          <a href="Contact.dc.html" style="display:inline-flex;align-items:center;gap:9px;padding:15px 28px;border-radius:13px;background:#2563EB;color:#FFFFFF;font-family:Sora,sans-serif;font-weight:700;font-size:15.5px;text-decoration:none;animation:kcGlow 2.6s ease-in-out infinite;">Get my quote →</a>
+          <a href="Checklist.dc.html" style="display:inline-flex;align-items:center;gap:9px;padding:15px 26px;border-radius:13px;background:rgba(16,42,76,0.07);border:1px solid rgba(16,42,76,0.18);color:#102A4C;font-weight:600;font-size:15px;text-decoration:none;">See what's included</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="KidusFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const start = () => {
+      if (window.kcInitReveal) { this._revealCleanup = window.kcInitReveal(this._root); }
+      else { this._revealRetry = setTimeout(start, 80); }
+    };
+    start();
+  }
+  componentWillUnmount() {
+    clearTimeout(this._revealRetry);
+    if (this._revealCleanup) this._revealCleanup();
+  }
+  renderVals() {
+    return {
+      rootRef: (el) => { this._root = el; },
+      types: [
+        { icon: 'auto_awesome', tag: 'One-time', title: 'Deep / Initial Clean', desc: 'A meticulous top-to-bottom reset for first-time cleans or a seasonal refresh.', includes: ['Cobwebs, vents, ceiling fans & baseboards', 'Detailed high-touch & window-track cleaning', 'Inside cabinets & appliance exteriors', 'Every room sanitized, not just surface-wiped'] },
+        { icon: 'event_repeat', tag: 'Weekly · Bi-weekly · Monthly', title: 'Recurring Clean', desc: 'Effortless upkeep on your schedule so your home always feels fresh.', includes: ['Consistent room-by-room checklist', 'Same trusted team where possible', 'Flexible — pause or reschedule anytime', 'Priority booking & member pricing'] },
+        { icon: 'local_shipping', tag: 'Move day', title: 'Move-In / Move-Out', desc: 'Spotless handovers that protect your deposit and start the next chapter clean.', includes: ['Inside drawers, cabinets & closets', 'Inside fridge & oven included', 'Walls, baseboards & door frames', 'Empty-home detail, top to bottom'] },
+        { icon: 'king_bed', tag: 'Turnovers', title: 'Vacation Rental / Airbnb', desc: 'Fast, flawless turnovers between guests that protect your 5-star ratings.', includes: ['Fresh linens & bed making', 'Restock toiletries & essentials', 'Guest-ready staging & reset', 'Damage & low-stock reporting'] },
+        { icon: 'real_estate_agent', tag: 'Showings', title: 'Listing / Showing Clean', desc: 'Make any property show-ready so it photographs and sells beautifully.', includes: ['Sparkling kitchens & bathrooms', 'Streak-free glass & mirrors', 'Detailed dusting & floor care', 'Flexible last-minute scheduling'] },
+        { icon: 'domain', tag: 'Offices & facilities', title: 'Office / Commercial', desc: 'Professional janitorial care that keeps your workplace pristine and healthy.', includes: ['After-hours & weekend availability', 'Disinfected high-touch surfaces', 'Restroom & breakroom sanitizing', 'Tailored daily / weekly schedules'] },
+      ].map((t) => ({ ...t, cardStyle: 'display:flex;flex-direction:column;padding:26px;border-radius:20px;background:#EFF4FB;border:1px solid rgba(16,42,76,0.08);transition:transform .3s ease,border-color .3s ease;' })),
+      spaces: [
+        { icon: 'home', title: 'Residential', desc: 'Houses cleaned spotless, every visit.' },
+        { icon: 'apartment', title: 'Apartment & Condo', desc: 'Tailored cleans for shared buildings.' },
+        { icon: 'cleaning_services', title: 'Janitorial', desc: 'Ongoing care that keeps premises fresh.' },
+        { icon: 'directions_car', title: 'Car Dealership', desc: 'Showroom-ready floors and offices.' },
+        { icon: 'weekend', title: 'Carpet & Upholstery', desc: 'Low-moisture deep extraction.' },
+        { icon: 'medical_services', title: 'Medical & Dental', desc: 'Hygienic, compliant clinic cleaning.' },
+        { icon: 'storefront', title: 'Retail', desc: 'Fresh, welcoming storefronts.' },
+        { icon: 'construction', title: 'Post Construction', desc: 'Dust-to-shine new-build cleanup.' },
+        { icon: 'airport_shuttle', title: 'RV Cleaning', desc: 'Interior & exterior detailing.' },
+      ],
+      addons: [
+        { icon: 'kitchen', label: 'Inside fridge' },
+        { icon: 'oven_gen', label: 'Inside oven' },
+        { icon: 'window', label: 'Interior windows' },
+        { icon: 'local_laundry_service', label: 'Laundry & linens' },
+        { icon: 'pets', label: 'Pet hair removal' },
+        { icon: 'door_sliding', label: 'Inside cabinets' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

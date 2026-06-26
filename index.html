@@ -121,7 +121,7 @@
   <section id="promise" style="max-width:1220px;margin:0 auto;padding:52px clamp(16px,4vw,40px) 8px;">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
       <sc-for list="{{ promises }}" as="s" hint-placeholder-count="4">
-        <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .3s ease,border-color .3s ease;padding:26px 24px;border-radius:18px;background:#EFF4FB;border:1px solid rgba(16,42,76,0.06);" style-hover="transform:translateY(-6px);border-color:rgba(37,99,235,0.35);">
+        <div data-reveal="1" style="{{ s.style }}" style-hover="transform:translateY(-6px);border-color:rgba(37,99,235,0.35);">
           <div style="font-family:'Material Symbols Outlined';font-variation-settings:'opsz' 30;font-size:32px;color:#2563EB;margin-bottom:14px;">{{ s.icon }}</div>
           <div style="font-family:Sora,sans-serif;font-weight:800;font-size:clamp(24px,3vw,30px);letter-spacing:-1px;color:#102A4C;line-height:1;">{{ s.value }}</div>
           <div style="margin-top:8px;font-size:14px;font-weight:600;color:#102A4C;">{{ s.label }}</div>
@@ -161,7 +161,7 @@
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
       <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
-        <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;position:relative;padding:30px 26px;border-radius:20px;background:linear-gradient(160deg,#EFF4FB,#E7EEF8);border:1px solid rgba(16,42,76,0.07);overflow:hidden;">
+        <div data-reveal="1" style="{{ st.style }}">
           <span style="position:absolute;top:-18px;right:6px;font-family:Sora,sans-serif;font-weight:800;font-size:96px;color:rgba(37,99,235,0.1);line-height:1;">{{ st.n }}</span>
           <div style="position:relative;z-index:2;">
             <div style="font-family:'Material Symbols Outlined';font-variation-settings:'opsz' 30;font-size:32px;color:#2563EB;margin-bottom:14px;">{{ st.icon }}</div>
@@ -189,7 +189,7 @@
         <p style="font-size:15.5px;line-height:1.7;color:rgba(16,42,76,0.7);margin:0 0 24px;max-width:520px;">We believe a clean environment is the foundation of a healthy, productive life. From a cozy family home to a busy office or large facility, we bring care, precision and attention to the details others skip — with custom plans built around your space and schedule.</p>
         <div style="display:flex;flex-direction:column;gap:14px;">
           <sc-for list="{{ whyPoints }}" as="w" hint-placeholder-count="4">
-            <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div data-reveal="1" style="{{ w.style }}">
               <span style="flex-shrink:0;width:38px;height:38px;border-radius:11px;background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.28);display:inline-flex;align-items:center;justify-content:center;font-family:'Material Symbols Outlined';font-variation-settings:'opsz' 20;font-size:21px;color:#2563EB;">{{ w.icon }}</span>
               <div><div style="font-family:Sora,sans-serif;font-weight:700;font-size:15.5px;color:#102A4C;margin-bottom:2px;">{{ w.title }}</div><div style="font-size:13.5px;line-height:1.55;color:rgba(16,42,76,0.6);">{{ w.desc }}</div></div>
             </div>
@@ -269,7 +269,7 @@
     </div>
     <div style="display:flex;flex-direction:column;gap:12px;">
       <sc-for list="{{ faqItems }}" as="f" hint-placeholder-count="5">
-        <div data-reveal="1" style="opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease,border-color .3s ease;border-radius:16px;background:#EFF4FB;border:1px solid rgba(16,42,76,0.08);overflow:hidden;">
+        <div data-reveal="1" style="{{ f.wrapStyle }}">
           <button onClick="{{ f.onClick }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;background:transparent;border:none;cursor:pointer;text-align:left;color:#102A4C;font-family:Sora,sans-serif;font-weight:600;font-size:16px;">
             {{ f.q }}<span style="{{ f.iconStyle }}">+</span>
           </button>
@@ -459,13 +459,14 @@ class Component extends DCLogic {
         onClick: () => this.setState({ faqOpen: isOpen ? -1 : i }),
         iconStyle: 'flex-shrink:0;font-size:22px;font-weight:400;color:#2563EB;transition:transform .3s ease;transform:rotate(' + (isOpen ? '45deg' : '0deg') + ');',
         answerStyle: 'overflow:hidden;transition:max-height .4s ease,opacity .3s ease;max-height:' + (isOpen ? '260px' : '0') + ';opacity:' + (isOpen ? 1 : 0) + ';',
+        wrapStyle: 'opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .5s cubic-bezier(.22,1,.36,1),border-color .3s ease;transition-delay:' + (i * 80) + 'ms;border-radius:16px;background:#EFF4FB;border:1px solid rgba(16,42,76,0.08);overflow:hidden;',
       };
     });
 
     const gallery = [0, 1, 2, 3, 4, 5].map((i) => ({
       id: 'kc-gal-' + i,
       placeholder: 'Drop photo ' + (i + 1),
-      wrapStyle: 'opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(16,42,76,0.08);background:#EFF4FB;' + (i === 0 || i === 3 ? 'grid-row:span 2;' : ''),
+      wrapStyle: 'opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .55s cubic-bezier(.22,1,.36,1);transition-delay:' + ((i % 3) * 110) + 'ms;position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(16,42,76,0.08);background:#EFF4FB;' + (i === 0 || i === 3 ? 'grid-row:span 2;' : ''),
     }));
 
     return {
@@ -486,18 +487,27 @@ class Component extends DCLogic {
         { icon: 'bolt', value: '100%', label: 'Instant pricing', sub: 'Transparent quotes, no hidden fees.' },
         { icon: 'support_agent', value: '100%', label: 'Responsive service', sub: 'Exceptional, fast customer care.' },
         { icon: 'verified', value: '100%', label: 'Satisfaction guarantee', sub: 'Not happy? We’ll make it right.' },
-      ],
+      ].map((s, i) => ({
+        ...s,
+        style: 'opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .5s cubic-bezier(.22,1,.36,1),border-color .3s ease;transition-delay:' + (i * 110) + 'ms;padding:26px 24px;border-radius:18px;background:#EFF4FB;border:1px solid rgba(16,42,76,0.06);',
+      })),
       steps: [
         { n: '1', icon: 'request_quote', title: 'Get your instant quote', desc: 'Book online or call 587-713-0909 — transparent pricing in minutes.' },
         { n: '2', icon: 'auto_awesome', title: 'We bring the sparkle', desc: 'Vetted pros arrive with eco products and your custom cleaning plan.' },
         { n: '3', icon: 'sentiment_satisfied', title: 'Relax, guaranteed', desc: 'Enjoy a fresh, spotless space — backed by our 100% satisfaction guarantee.' },
-      ],
+      ].map((s, i) => ({
+        ...s,
+        style: 'opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .55s cubic-bezier(.22,1,.36,1);transition-delay:' + (i * 140) + 'ms;position:relative;padding:30px 26px;border-radius:20px;background:linear-gradient(160deg,#EFF4FB,#E7EEF8);border:1px solid rgba(16,42,76,0.07);overflow:hidden;',
+      })),
       whyPoints: [
         { icon: 'eco', title: 'Eco-friendly & safe', desc: 'Green products and methods that are safe for family, pets and the planet.' },
         { icon: 'tune', title: 'Custom cleaning plans', desc: 'Tailored to your schedule, space and needs — daily upkeep to deep cleans.' },
         { icon: 'groups', title: 'Expert, trusted teams', desc: 'Experienced professionals who care about the details others skip.' },
         { icon: 'support_agent', title: 'Responsive support', desc: 'Real people, quick answers and exceptional service, every time.' },
-      ],
+      ].map((w, i) => ({
+        ...w,
+        style: 'opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .5s cubic-bezier(.22,1,.36,1);transition-delay:' + (i * 110) + 'ms;display:flex;gap:14px;align-items:flex-start;',
+      })),
       avatars: [
         { i: 'S', bg: '#2563EB' }, { i: 'M', bg: '#DCE8F8' }, { i: 'A', bg: '#3D6FB5' }, { i: 'J', bg: '#3D6FB5' },
       ],

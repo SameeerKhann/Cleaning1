@@ -47,7 +47,7 @@
   <section style="max-width:1220px;margin:0 auto;padding:16px clamp(16px,4vw,40px) 90px;">
     <div class="kc-team-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;">
       <sc-for list="{{ team }}" as="m" hint-placeholder-count="6">
-        <div data-reveal="1" style="border-radius:20px;overflow:hidden;background:#EFF4FB;border:1px solid rgba(16,42,76,0.08);transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-4px);border-color:rgba(37,99,235,0.35);">
+        <div data-reveal="1" style="{{ m.style }}" style-hover="transform:translateY(-4px);border-color:rgba(37,99,235,0.35);">
           <img src="{{ m.photo }}" alt="{{ m.name }}" style="width:100%;height:240px;object-fit:cover;display:block;"/>
           <div style="padding:16px 18px 20px;">
             <div style="font-family:Sora,sans-serif;font-weight:700;font-size:16px;color:#102A4C;">{{ m.name }}</div>
@@ -84,7 +84,10 @@ class Component extends DCLogic {
         { name: 'Team Member 4', role: 'Cleaning Specialist', photo: 'assets/team/p4.png' },
         { name: 'Team Member 5', role: 'Cleaning Specialist', photo: 'assets/team/p5.png' },
         { name: 'Team Member 6', role: 'Cleaning Specialist', photo: 'assets/team/p6.png' },
-      ],
+      ].map((m, i) => ({
+        ...m,
+        style: 'opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .55s cubic-bezier(.22,1,.36,1),border-color .3s ease;transition-delay:' + ((i % 3) * 110) + 'ms;border-radius:20px;overflow:hidden;background:#EFF4FB;border:1px solid rgba(16,42,76,0.08);',
+      })),
     };
   }
 }
